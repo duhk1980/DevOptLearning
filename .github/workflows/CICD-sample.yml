@@ -1,1 +1,26 @@
+name: CI/CD Pipeline
 
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: [self-hosted, LT-DUHOAC]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create Folder
+        run: mkdir my_folder
+
+      - name: Stop Service
+        run: net stop iphlpsvc
+
+      - name: Start Service
+        run: net start iphlpsvc
