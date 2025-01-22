@@ -9,5 +9,10 @@ jobs:
   test:
     runs-on: [onprem-selfhost] #self-hosted
     steps:
-      - name: Run a command
+      - name: Run a command # task 1
         run: echo "Self-hosted runner is working!"
+      - name: Checkout code  # task 2 checkout code of your repository
+        uses: actions/checkout@v2
+      - name: Create Folder # create a folder C:\Temp
+        run: mkdir C:\Temp\techlabvn_folder
+        
