@@ -7,7 +7,7 @@ on:
 
 jobs:
   test:
-    runs-on: [LT-DUHOAC] #self-hosted
+    runs-on: [onprem-selfhost] #self-hosted
     steps:
       - name: Run a command
         run: echo "Self-hosted runner is working!"
