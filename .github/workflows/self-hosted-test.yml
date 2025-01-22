@@ -14,7 +14,13 @@ jobs:
       - name: Checkout code  # task 2 checkout code of your repository
         uses: actions/checkout@v2
       - name: Create Folder # create a folder C:\Temp
-        run: mkdir C:\Temp\techlabvn_folder
+        run: |
+          if (-Not (Test-Path -Path 'C:\Temp\techlabvn_folder')) {
+            mkdir 'C:\Temp\techlabvn_folder'
+            Write-Host "Folder created: C:\Temp\techlabvn_folder"
+          } else {
+            Write-Host "Folder already exists: C:\Temp\techlabvn_folder"
+          }
   Stop_and_start_service_windows_update:
     runs-on: [onprem-selfhost] #self-hosted
     steps:
