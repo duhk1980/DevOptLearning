@@ -15,4 +15,10 @@ jobs:
         uses: actions/checkout@v2
       - name: Create Folder # create a folder C:\Temp
         run: mkdir C:\Temp\techlabvn_folder
-        
+  Stop_and_start_service_windows_update:
+    runs-on: [onprem-selfhost] #self-hosted
+    steps:
+      - name: Stop Service
+        run: net stop wuauserv
+      - name: Start Service
+        run: net start wuauserv
