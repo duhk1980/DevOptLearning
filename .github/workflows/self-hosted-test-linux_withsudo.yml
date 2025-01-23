@@ -6,41 +6,24 @@ on:
       - main
 
 jobs:
-  # job test
-  test: 
-    runs-on: selfhostlinux # runos self-hosted and label selfhostlinux
-    env: # define variable for job
-        BACKUP_SOURCE: ~/actions-runner/_work/DevOptLearning
-        BACKUP_FILEPATH: ~/actions-runner/_work/DevOptLearning_backup_$(date +%Y%m%d%H%M%S).tar.gz
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Backup Source Web Directory
-        run: |
-          tar -czvf ${{ env.BACKUP_FILEPATH }} ${{ env.BACKUP_SOURCE }}
-        shell: bash
-  # job install apache and stop start service after install succeffully.
-  install-and-manage-apache: 
+  install-and-manage-apache:
     runs-on: selfhostlinux
     env: 
       DEPLOY_USER: ${{ secrets.LINUXDEPLOY_USER }}
       DEPLOY_PASSWORD: ${{ secrets.LINUXDEPLOY_PASSWORD }}
     steps:
-      # install apache 
       - name: Install Apache
         id: install_apache
         run: |
-             echo "${{ env.DEPLOY_PASSWORD }}" | sudo -S -u ${{ env.DEPLOY_USER }} sudo apt-get update && sudo apt-get install -y apache2
+          echo "${{ env.DEPLOY_PASSWORD }}" | sudo -S apt-get update && sudo apt-get install -y apache2
         shell: bash
-      # stop if install success
       - name: Stop Apache Service
-        if: steps.install_apache.conclusion == 'success' # stop if install success
+        if: steps.install_apache.conclusion == 'success'
         run: |
-              echo "${{ env.DEPLOY_PASSWORD }}" | sudo -S -u ${{ env.DEPLOY_USER}} sudo systemctl stop apache2
+          echo "${{ env.DEPLOY_PASSWORD }}" | sudo -S systemctl stop apache2
         shell: bash    
-       # Start if install success
       - name: Start Apache Service
-        if: steps.install_apache.conclusion == 'success' # stop if install success
+        if: steps.install_apache.conclusion == 'success'
         run: |
-              echo "${{ env.DEPLOY_PASSWORD }}" | sudo -S -u ${{ env.DEPLOY_USER }} sudo systemctl start apache2
-        shell: bash 
+          echo "${{ env.DEPLOY_PASSWORD }}" | sudo -S systemctl start apache2
+        shell: bash
