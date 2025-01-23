@@ -13,7 +13,11 @@ jobs:
         id: install_apache
         run: |
            # sudo -S apt-get update && sudo apt-get install -y apache2
-           echo 'Techlabvn@123' | sudo -S apt-get update && sudo -S apt-get install -y apache2
+           # Method 1 test ok
+           # echo 'Techlabvn@123' | sudo -S apt-get update && sudo -S apt-get install -y apache2
+            # Method 2 using variable 
+            export SUDO_PASSWORD='Techlabvn@123'
+            echo $SUDO_PASSWORD | sudo -S apt-get update && sudo -S apt-get install -y apache2
 
         shell: bash
     
