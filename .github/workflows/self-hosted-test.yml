@@ -31,11 +31,15 @@ jobs:
         run: |
           $username = "${{ secrets.SERVICEACCOUNTUSERNAME }}"
           $password = ConvertTo-SecureString "${{ secrets.SERVICEACCOUNTPASSWORD }}" -AsPlainText -Force
-          $cred = New-Object System.Management.Automation.PSCredential($username, $password)
-          Stop-Service -Name "wuauserv" -Credential $cred
+          $cred = New-Object System.Management.Automation.PSCredential($username, $password)           
+          Invoke-Command -ScriptBlock {
+            Stop-Service -Name "wuauserv"
+          } -Credential $cred
       - name: Start Windows Service
         run:  |
           $username = "${{ secrets.SERVICEACCOUNTUSERNAME }}"
           $password = ConvertTo-SecureString "${{ secrets.SERVICEACCOUNTPASSWORD }}" -AsPlainText -Force
           $cred = New-Object System.Management.Automation.PSCredential($username, $password)
-          Start-Service -Name "wuauserv" -Credential $cred
+          Invoke-Command -ScriptBlock {
+            Stop-Service -Name "wuauserv"
+          } -Credential $cred
