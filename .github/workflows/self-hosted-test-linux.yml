@@ -7,7 +7,7 @@ on:
 
 jobs:
   test:
-    runs-on: elf-hosted, selfhostlinux # runos self-hosted and label selfhostlinux
+    runs-on: selfhostlinux # runos self-hosted and label selfhostlinux
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
