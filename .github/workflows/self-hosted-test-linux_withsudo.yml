@@ -17,9 +17,11 @@ jobs:
            # Method 1 test ok
            # echo 'Techlabvn@123' | sudo -S apt-get update && sudo -S apt-get install -y apache2
            # Method 2 using variable ok
+           export SUDO_USER="${{ secrets.LINUXDEPLOY_USER }}"
            export SUDO_PASSWORD="${{ secrets.LINUXDEPLOY_PASSWORD }}"
            echo "${{ secrets.LINUXDEPLOY_PASSWORD }}"
-           echo $SUDO_PASSWORD | sudo -S apt-get update && sudo -S apt-get install -y apache2
+           #echo $SUDO_PASSWORD | sudo -S apt-get update && sudo -S apt-get install -y apache2
+           echo $SUDO_PASSWORD | sudo -S -u $SUDO_USER apt-get update && sudo -S -u $SUDO_USER apt-get install -y apache2
              
       - name: Stop Apache
         shell: bash
