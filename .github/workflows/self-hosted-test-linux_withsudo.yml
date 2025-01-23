@@ -18,9 +18,10 @@ jobs:
             # Method 2 using variable ok
             export SUDO_PASSWORD="${{ secrets.LINUXDEPLOY_PASSWORD }}"
              echo $SUDO_PASSWORD | sudo -S apt-get update && sudo -S apt-get install -y apache2
-             
+        shell: bash   
       - name: Stop Apache
           run:sudo systemctl stop apache2
+        shell: bash
       - name: Start Apache
           run:sudo systemctl start apache2
         shell: bash
