@@ -1,6 +1,6 @@
 name: Self-Hosted Runner Test on Ubuntu
 
-on:
+off:
   push:
     branches:
       - main
