@@ -1,0 +1,36 @@
+name: Manage Windows Service with WinRM
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  manage-service:
+    runs-on: [windows-latest]
+    steps:
+      - name: Stop Windows Service
+        run: |
+          $username = "${{ secrets.SERVICEACCOUNTUSERNAME }}"
+          $password = "${{ secrets.SERVICEACCOUNTPASSWORD }}"
+          $securePassword = ConvertTo-SecureString $password -AsPlainText -Force
+          $cred = New-Object System.Management.Automation.PSCredential ($username, $securePassword)
+          $session = New-PSSession -ComputerName "LT-DuHoac" -Credential $cred
+          Invoke-Command -Session $session -ScriptBlock {
+            Stop-Service -Name "wuauserv"
+          }
+          Remove-PSSession -Session $session
+        shell: powershell
+
+      - name: Start Windows Service
+        run: |
+          $username = "${{ secrets.SERVICEACCOUNTUSERNAME }}"
+          $password = "${{ secrets.SERVICEACCOUNTPASSWORD }}"
+          $securePassword = ConvertTo-SecureString $password -AsPlainText -Force
+          $cred = New-Object System.Management.Automation.PSCredential ($username, $securePassword)
+          $session = New-PSSession -ComputerName "LT-DuHoac" -Credential $cred
+          Invoke-Command -Session $session -ScriptBlock {
+            Start-Service -Name "wuauserv"
+          }
+          Remove-PSSession -Session $session
+        shell: powershell
