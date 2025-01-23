@@ -26,7 +26,16 @@ jobs:
     steps:
       - name: Log User Running Workflow
         run: echo "User running this workflow:${{ github.actor }}"
-      - name: Stop Service
-        run: net stop wuauserv
-      - name: Start Service
-        run: net start wuauserv
+      - name: Stop Windows Service
+        shell: powershell
+        run:
+          $username = "${{ secrets.SERVICEACCOUNTUSERNAME }}"
+          $password = ConvertTo-SecureString "${{ secrets.SERVICEACCOUNTPASSWORD }}" -AsPlainText -Force
+          $cred = New-Object System.Management.Automation.PSCredential($username, $password)
+          Stop-Service -Name "wuauserv" -Credential $cred
+      - name: Start Windows Service
+        run: 
+          $username = "${{ secrets.SERVICEACCOUNTUSERNAME }}"
+          $password = ConvertTo-SecureString "${{ secrets.SERVICEACCOUNTPASSWORD }}" -AsPlainText -Force
+          $cred = New-Object System.Management.Automation.PSCredential($username, $password)
+          Start-Service -Name "wuauserv" -Credential $cred
