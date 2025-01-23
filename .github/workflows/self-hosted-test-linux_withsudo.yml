@@ -36,7 +36,7 @@ jobs:
       - name: Stop Apache Service
         if: steps.install_apache.conclusion == 'success' # stop if install success
         run: |
-              echo "${{ senv.DEPLOY_PASSWORD }}" | sudo -S -u ${{ env.DEPLOY_USER}} sudo systemctl stop apache2
+              echo "${{ env.DEPLOY_PASSWORD }}" | sudo -S -u ${{ env.DEPLOY_USER}} sudo systemctl stop apache2
         shell: bash    
        # Start if install success
       - name: Start Apache Service
