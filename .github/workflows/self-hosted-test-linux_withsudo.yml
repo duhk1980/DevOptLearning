@@ -8,22 +8,10 @@ on:
 jobs:
   install-and-manage-apache:
     runs-on: selfhostlinux
-    env: 
-      DEPLOY_USER: ${{ secrets.LINUXDEPLOY_USER }}
-      DEPLOY_PASSWORD: ${{ secrets.LINUXDEPLOY_PASSWORD }}
     steps:
       - name: Install Apache
         id: install_apache
         run: |
-          echo "${{ env.DEPLOY_PASSWORD }}" | sudo -S apt-get update && sudo apt-get install -y apache2
+           sudo -S apt-get update && sudo apt-get install -y apache2
         shell: bash
-      - name: Stop Apache Service
-        if: steps.install_apache.conclusion == 'success'
-        run: |
-          echo "${{ env.DEPLOY_PASSWORD }}" | sudo -S systemctl stop apache2
-        shell: bash    
-      - name: Start Apache Service
-        if: steps.install_apache.conclusion == 'success'
-        run: |
-          echo "${{ env.DEPLOY_PASSWORD }}" | sudo -S systemctl start apache2
-        shell: bash
+    
