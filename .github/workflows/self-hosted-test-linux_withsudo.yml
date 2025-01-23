@@ -20,7 +20,7 @@ jobs:
            export SUDO_USER="${{ secrets.LINUXDEPLOY_USER }}"
            export SUDO_PASSWORD="${{ secrets.LINUXDEPLOY_PASSWORD }}"
          
-           echo $SUDO_PASSWORD | su - SUDO_USER
+           echo $SUDO_PASSWORD | su - $SUDO_USER
            sudo apt-get update 
            sudo apt-get install -y apache2
 
