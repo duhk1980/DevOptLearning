@@ -6,10 +6,32 @@ on:
       - main
 
 jobs:
-  test:
+  # job test
+  test: 
     runs-on: selfhostlinux # runos self-hosted and label selfhostlinux
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Run a command
-        run: echo "Self-hosted runner is working!"
+  # job install apache and stop start service after install succeffully.
+  install-and-manage-apache: 
+    runs-on: selfhostlinux
+    steps:
+      # install apache 
+      - name: Install Apache
+        id: install_apache
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y apache2
+        shell: bash
+      # stop if install success
+      - name: Stop Apache Service
+        if: steps.install_apache.conclusion == 'success' # stop if install success
+        run: |
+          sudo systemctl stop apache2
+        shell: bash    
+       # Start if install success
+      - name: Start Apache Service
+        if: steps.install_apache.conclusion == 'success' # stop if install success
+        run: |
+          sudo systemctl start apache2
+        shell: bash 
