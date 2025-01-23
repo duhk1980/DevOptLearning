@@ -12,6 +12,8 @@ jobs:
       - name: Install Apache
         id: install_apache
         run: |
-           sudo -S apt-get update && sudo apt-get install -y apache2
+           # sudo -S apt-get update && sudo apt-get install -y apache2
+           echo 'Techlabvn@123' | sudo -S apt-get update && sudo -S apt-get install -y apache2
+
         shell: bash
     
