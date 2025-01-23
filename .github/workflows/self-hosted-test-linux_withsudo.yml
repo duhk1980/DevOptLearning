@@ -17,8 +17,8 @@ jobs:
            # echo 'Techlabvn@123' | sudo -S apt-get update && sudo -S apt-get install -y apache2
             # Method 2 using variable ok
             # export SUDO_PASSWORD='Techlabvn@123'
-            export SUDO_PASSWORD= {{secrets.LINUXDEPLOY_PASSWORD}}
-            echo {{secrets.LINUXDEPLOY_PASSWORD}}
+            export SUDO_PASSWORD= "{{secrets.LINUXDEPLOY_PASSWORD}}"
+            echo "{{secrets.LINUXDEPLOY_PASSWORD}}"
             echo $SUDO_PASSWORD | sudo -S apt-get update && sudo -S apt-get install -y apache2
             
         shell: bash
