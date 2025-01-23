@@ -9,9 +9,16 @@ jobs:
   # job test
   test: 
     runs-on: selfhostlinux # runos self-hosted and label selfhostlinux
+    env: # define variable for job
+        BACKUP_SOURCE: ~/actions-runner/_work/DevOptLearning
+        BACKUP_FILEPATH: ~/actions-runner/_work/DevOptLearning_backup_$(date +%Y%m%d%H%M%S).tar.gz
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Backup Source Web Directory
+        run: |
+          tar -czvf ${{ env.BACKUP_FILEPATH }} ${{ env.BACKUP_SOURCE }}
+        shell: bash
   # job install apache and stop start service after install succeffully.
   install-and-manage-apache: 
     runs-on: selfhostlinux
