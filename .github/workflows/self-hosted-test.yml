@@ -25,7 +25,7 @@ jobs:
     runs-on: [onprem-selfhost] #self-hosted
     steps:
       - name: Log User Running Workflow
-        run: echo "User running this workflow: ${{ github.actor }}"
+        run: echo "User running this workflow:${{ github.actor }}"
       - name: Stop Service
         run: net stop wuauserv
       - name: Start Service
