@@ -7,7 +7,7 @@ on:
 
 jobs:
   test:
-    runs-on: self-hosted, selfhostlinux # runos self-hosted and label selfhostlinux
+    runs-on: selfhostlinux # runos self-hosted and label selfhostlinux
     steps:
       - name: Run a command
         run: echo "Self-hosted runner is working!"
