@@ -1,0 +1,43 @@
+name: Self-Hosted Runner Test on Ubuntu bypasssudo
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  # job test
+  test: 
+    runs-on: selfhostlinux # runos self-hosted and label selfhostlinux
+    env: # define variable for job
+        BACKUP_SOURCE: ~/actions-runner/_work/DevOptLearning
+        BACKUP_FILEPATH: ~/actions-runner/_work/DevOptLearning_backup_$(date +%Y%m%d%H%M%S).tar.gz
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Backup Source Web Directory
+        run: |
+          tar -czvf ${{ env.BACKUP_FILEPATH }} ${{ env.BACKUP_SOURCE }}
+        shell: bash
+  # job install apache and stop start service after install succeffully.
+  install-and-manage-apache: 
+    runs-on: selfhostlinux
+    steps:
+      # install apache 
+      - name: Install Apache
+        id: install_apache
+        run: |
+             echo "${{ secrets.DEPLOY_PASSWORD }}" | sudo -S -u ${{ secrets.DEPLOY_USER }} sudo apt-get update && sudo apt-get install -y apache2
+        shell: bash
+      # stop if install success
+      - name: Stop Apache Service
+        if: steps.install_apache.conclusion == 'success' # stop if install success
+        run: |
+              echo "${{ secrets.DEPLOY_PASSWORD }}" | sudo -S -u ${{ secrets.DEPLOY_USER }} sudo systemctl stop apache2
+        shell: bash    
+       # Start if install success
+      - name: Start Apache Service
+        if: steps.install_apache.conclusion == 'success' # stop if install success
+        run: |
+              echo "${{ secrets.DEPLOY_PASSWORD }}" | sudo -S -u ${{ secrets.DEPLOY_USER }} sudo systemctl start apache2
+        shell: bash 
