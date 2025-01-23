@@ -19,10 +19,11 @@ jobs:
            # Method 2 using variable ok
            export SUDO_USER="${{ secrets.LINUXDEPLOY_USER }}"
            export SUDO_PASSWORD="${{ secrets.LINUXDEPLOY_PASSWORD }}"
-           echo "${{ secrets.LINUXDEPLOY_PASSWORD }}"
-           #echo $SUDO_PASSWORD | sudo -S apt-get update && sudo -S apt-get install -y apache2
-           echo $SUDO_PASSWORD | sudo -S -u $SUDO_USER apt-get update && sudo -S -u $SUDO_USER apt-get install -y apache2
-             
+         
+           echo $SUDO_PASSWORD | su - SUDO_USER
+           sudo apt-get update 
+           sudo apt-get install -y apache2
+
       - name: Stop Apache
         shell: bash
         run: sudo systemctl stop apache2
