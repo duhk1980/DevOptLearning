@@ -23,18 +23,18 @@ jobs:
           }
   Stop_and_start_service_windows_update:
     runs-on: [onprem-selfhost] #self-hosted
-    steps:
+    steps: 
       - name: Log User Running Workflow
         run: echo "User running this workflow:${{ github.actor }}"
       - name: Stop Windows Service
         shell: powershell
-        run:
+        run: |
           $username = "${{ secrets.SERVICEACCOUNTUSERNAME }}"
           $password = ConvertTo-SecureString "${{ secrets.SERVICEACCOUNTPASSWORD }}" -AsPlainText -Force
           $cred = New-Object System.Management.Automation.PSCredential($username, $password)
           Stop-Service -Name "wuauserv" -Credential $cred
       - name: Start Windows Service
-        run: 
+        run:  |
           $username = "${{ secrets.SERVICEACCOUNTUSERNAME }}"
           $password = ConvertTo-SecureString "${{ secrets.SERVICEACCOUNTPASSWORD }}" -AsPlainText -Force
           $cred = New-Object System.Management.Automation.PSCredential($username, $password)
