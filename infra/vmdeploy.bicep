@@ -7,7 +7,7 @@ param adminUsername string
 param adminPassword string
 
 @description('Unique DNS Name for the Public IP used to access the Virtual Machine.')
-param dnsLabelPrefix string = toLower('${take(replace(vmName, '-', ''), 5)}${uniqueString(resourceGroup().id, vmName)}')
+param dnsLabelPrefix string = toLower('${vmName}${uniqueString(resourceGroup().id, vmName)}')
 
 
 @description('Name for the Public IP used to access the Virtual Machine.')
