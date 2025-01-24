@@ -25,4 +25,5 @@ jobs:
           adminUsername=${{ secrets.ADMIN_USERNAME }}
           adminPassword=${{ secrets.ADMIN_PASSWORD }}
          
+         
         failOnStdErr: false
