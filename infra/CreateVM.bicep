@@ -7,6 +7,9 @@ param existingVnetResourceGroup string
 @description('Specify the name of the Subnet Name')
 param existingSubnetName string
 
+@description('Specify the name of the NIC Name')
+param nicName string
+
 @description('Username for the Virtual Machine.')
 param adminUsername string
 
@@ -81,7 +84,7 @@ param vmName string = 'simple-vm'
 param securityType string = 'TrustedLaunch'
 
 var storageAccountName = 'bootdiags${uniqueString(resourceGroup().id)}'
-var nicName = 'myVMNic'
+#var nicName = 'myVMNic'
 var addressPrefix = '10.0.0.0/16'
 var subnetName = 'Subnet'
 var subnetPrefix = '10.0.0.0/24'
@@ -181,7 +184,7 @@ resource nic 'Microsoft.Network/networkInterfaces@2022-05-01' = {
             id: publicIp.id
           }
           subnet: {
-            id: resourceId('Microsoft.Network/virtualNetworks/subnets', virtualNetworkName, subnetName)
+            id: resourceId('Microsoft.Network/virtualNetworks/subnets', existingVirtualNetworkName, existingSubnetName )
           }
         }
       }
