@@ -22,13 +22,12 @@ jobs:
         resourceGroupName: ${{ secrets.AZURE_RG }}
         template: ./infra/CreateVM.bicep # input place store your bicep file and filename
         # input storagePrefix=mystore to create storagename in bicep file   
-        parameters: |
-    
-          adminUsername=${{ secrets.ADMIN_USERNAME }}
-           adminPassword=${{ secrets.ADMIN_PASSWORD }}
-           existingVirtualNetworkName='MyVNET'
-            existingSubnetName='Subnet'
-            nicName='myVMNic'
+        parameters: 
+          adminUsername: ${{ secrets.ADMIN_USERNAME }}
+          adminPassword: ${{ secrets.ADMIN_PASSWORD }}
+          existingVirtualNetworkName: 'MyVNET'
+          existingSubnetName: 'Subnet'
+          nicName: 'myVMNic'
 
          
          
