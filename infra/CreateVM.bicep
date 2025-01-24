@@ -158,9 +158,7 @@ resource nic 'Microsoft.Network/networkInterfaces@2022-05-01' = {
       }
     ]
   }
-  dependsOn: [
-    publicIp
-  ]
+  
 }
 
 resource vm 'Microsoft.Compute/virtualMachines@2022-03-01' = {
