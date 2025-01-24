@@ -26,9 +26,9 @@ jobs:
     
           adminUsername=${{ secrets.ADMIN_USERNAME }}
            adminPassword=${{ secrets.ADMIN_PASSWORD }}
-           existingVirtualNetworkName=MyVNET
-            existingSubnetName=Subnet
-            nicName=myVMNic
+           existingVirtualNetworkName='MyVNET'
+            existingSubnetName='Subnet'
+            nicName='myVMNic'
 
          
          
