@@ -4,7 +4,6 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-
     - name: Checkout code
       uses: actions/checkout@main
 
@@ -12,6 +11,7 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
+
     - name: Debugging Output
       run: echo "vmName=${{ secrets.COMPUTER_NAME }} adminUsername=${{ secrets.ADMIN_USERNAME }} adminPassword=${{ secrets.ADMIN_PASSWORD }}"
 
@@ -20,15 +20,11 @@ jobs:
       with:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
         resourceGroupName: ${{ secrets.AZURE_RG }}
-        template: ./infra/CreateVM.bicep # input place store your bicep file and filename
-        # input storagePrefix=mystore to create storagename in bicep file   
+        template: ./infra/CreateVM.bicep  # Ensure this path is correct
         parameters: |
           adminUsername: ${{ secrets.ADMIN_USERNAME }}
           adminPassword: ${{ secrets.ADMIN_PASSWORD }}
-          existingVirtualNetworkName: MyVNET
-          existingSubnetName: Subnet
-          nicName: myVMNic
-
-         
-         
+          existingVirtualNetworkName: 'MyVNET'
+          existingSubnetName: 'Subnet'
+          nicName: 'myVMNic'
         failOnStdErr: false
