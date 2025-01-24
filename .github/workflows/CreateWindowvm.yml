@@ -21,9 +21,9 @@ jobs:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
         resourceGroupName: ${{ secrets.AZURE_RG }}
         template: ./infra/CreateVM.bicep  # Ensure this path is correct
-        parameters: |
+        parameters: |       
           adminUsername: ${{ secrets.ADMIN_USERNAME }}
-          adminPassword: ${{ secrets.ADMIN_PASSWORD }}
+          adminPassword: ${{ secrets.ADMIN_PASSWORD }}     
           existingVirtualNetworkName: 'MyVNET'
           existingSubnetName: 'Subnet'
           nicName: 'myVMNic'
