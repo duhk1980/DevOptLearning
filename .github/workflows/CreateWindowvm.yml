@@ -12,6 +12,8 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - name: Debugging Output
+      run: echo "vmName=${{ secrets.COMPUTER_NAME }} adminUsername=${{ secrets.ADMIN_USERNAME }} adminPassword=${{ secrets.ADMIN_PASSWORD }}"
 
     - name: Deploy Bicep file
       uses: azure/arm-deploy@v1
@@ -21,10 +23,9 @@ jobs:
         template: ./infra/vmdeploy.bicep # input place store your bicep file and filename
         # input storagePrefix=mystore to create storagename in bicep file
         parameters: |
-          vmName=${{ secrets.COMPUTER_NAME }} |
-          #adminUsername=${{ secrets.ADMIN_USERNAME }}
-          adminUsername='duhk'
-          adminPassword=${{ secrets.ADMIN_PASSWORD }}
+          vmName=${{ secrets.COMPUTER_NAME }}
+          adminUsername=${{ secrets.ADMIN_USERNAME }}
+           adminPassword=${{ secrets.ADMIN_PASSWORD }}
          
          
         failOnStdErr: false
