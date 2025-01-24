@@ -1,4 +1,4 @@
-name: Deploy Bicep file
+name: Deploy Windows VM using Bicep file
 on: [push]
 jobs:
   build-and-deploy:
