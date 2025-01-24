@@ -21,8 +21,7 @@ jobs:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
         resourceGroupName: ${{ secrets.AZURE_RG }}
         template: ./infra/vmdeploy.bicep # input place store your bicep file and filename
-        # input storagePrefix=mystore to create storagename in bicep file
-        #vmName=${{ secrets.COMPUTER_NAME }}
+        # input storagePrefix=mystore to create storagename in bicep file   
         parameters: |
           
             adminUsername=${{ secrets.ADMIN_USERNAME }}
