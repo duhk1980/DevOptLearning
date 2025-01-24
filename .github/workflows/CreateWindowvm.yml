@@ -24,7 +24,7 @@ jobs:
         # input storagePrefix=mystore to create storagename in bicep file
         parameters: |
           vmName=${{ secrets.COMPUTER_NAME }}
-          adminUsername=${{ secrets.ADMIN_USERNAME }}
+            adminUsername=${{ secrets.ADMIN_USERNAME }}
            adminPassword=${{ secrets.ADMIN_PASSWORD }}
          
          
