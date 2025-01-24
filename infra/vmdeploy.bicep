@@ -9,7 +9,6 @@ param adminPassword string
 @description('Unique DNS Name for the Public IP used to access the Virtual Machine.')
 param dnsLabelPrefix string = toLower('${vmName}${uniqueString(resourceGroup().id, vmName)}')
 
-
 @description('Name for the Public IP used to access the Virtual Machine.')
 param publicIpName string = 'myPublicIP'
 
@@ -179,7 +178,6 @@ resource nic 'Microsoft.Network/networkInterfaces@2022-05-01' = {
     ]
   }
   dependsOn: [
-
     virtualNetwork
   ]
 }
