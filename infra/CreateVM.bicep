@@ -1,9 +1,6 @@
 @description('Specify the name of an existing VNet in the same resource group')
 param existingVirtualNetworkName string
 
-@description('Specify the resrouce group of the existing VNet')
-param existingVnetResourceGroup string
-
 @description('Specify the name of the Subnet Name')
 param existingSubnetName string
 
