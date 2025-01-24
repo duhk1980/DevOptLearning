@@ -84,11 +84,6 @@ param vmName string = 'simple-vm'
 param securityType string = 'TrustedLaunch'
 
 var storageAccountName = 'bootdiags${uniqueString(resourceGroup().id)}'
-#var nicName = 'myVMNic'
-var addressPrefix = '10.0.0.0/16'
-var subnetName = 'Subnet'
-var subnetPrefix = '10.0.0.0/24'
-var virtualNetworkName = 'MyVNET'
 var networkSecurityGroupName = 'default-NSG'
 var securityProfileJson = {
   uefiSettings: {
@@ -148,28 +143,6 @@ resource networkSecurityGroup 'Microsoft.Network/networkSecurityGroups@2022-05-0
   }
 }
 
-resource virtualNetwork 'Microsoft.Network/virtualNetworks@2022-05-01' = {
-  name: virtualNetworkName
-  location: location
-  properties: {
-    addressSpace: {
-      addressPrefixes: [
-        addressPrefix
-      ]
-    }
-    subnets: [
-      {
-        name: subnetName
-        properties: {
-          addressPrefix: subnetPrefix
-          networkSecurityGroup: {
-            id: networkSecurityGroup.id
-          }
-        }
-      }
-    ]
-  }
-}
 
 resource nic 'Microsoft.Network/networkInterfaces@2022-05-01' = {
   name: nicName
