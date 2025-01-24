@@ -20,5 +20,5 @@ jobs:
         resourceGroupName: ${{ secrets.AZURE_RG }}
         template: ./infra/main.bicep # input place store your bicep file and filename
         # input storagePrefix=mystore to create storagename in bicep file
-        parameters: 'storagePrefix=techlabvnblob storageSKU=Standard_LRS' 
+        parameters: 'storagePrefix=lablob storageSKU=Standard_LRS' 
         failOnStdErr: false
