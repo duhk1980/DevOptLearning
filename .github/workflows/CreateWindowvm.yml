@@ -1,3 +1,4 @@
+# Tested
 name: Deploy Windows VM using Bicep file
 on: [push]
 jobs:
