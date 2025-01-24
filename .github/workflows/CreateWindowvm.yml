@@ -1,5 +1,5 @@
 name: Deploy Bicep file
-on: [push]
+off: [push]
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -24,8 +24,13 @@ jobs:
         # input storagePrefix=mystore to create storagename in bicep file   
         parameters: |
     
-            adminUsername=${{ secrets.ADMIN_USERNAME }}
-             adminPassword=${{ secrets.ADMIN_PASSWORD }}
+          adminUsername=${{ secrets.ADMIN_USERNAME }}
+           adminPassword=${{ secrets.ADMIN_PASSWORD }}
+           existingVirtualNetworkName=MyVNET
+          existingVnetResourceGroup=Techlabvn
+            existingSubnetName=Subnet
+            nicName=myVMNic
+
          
          
         failOnStdErr: false
