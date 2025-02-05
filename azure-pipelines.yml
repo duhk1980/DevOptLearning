@@ -5,7 +5,7 @@ pool:
   vmImage: 'ubuntu-latest' 
 
 variables:
-  repositoryName: 'DevOptLearning' # enter your repository name
+  repositoryName: 'getting-started' # enter your repository name
 
 steps:
 - task: Docker@2
